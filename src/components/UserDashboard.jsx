@@ -21,12 +21,20 @@ const Dashboard = () => {
     useEffect(() => {
         const getUserLocationData = async () => {
             try {
-                const response = await fetch('https://ipapi.co/json/');
+                // Use a CORS proxy to access ipapi.co
+                const response = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent('https://ipapi.co/json/'));
                 if (!response.ok) throw new Error('Failed to fetch location');
                 return await response.json();
             } catch (error) {
                 console.error("Could not fetch location data:", error);
-                return { error: "Could not fetch location" };
+                // Fallback to a default location (Dhaka, Bangladesh)
+                return {
+                    city: "Dhaka",
+                    country: "Bangladesh",
+                    latitude: 23.8103,
+                    longitude: 90.4125,
+                    timezone: "Asia/Dhaka"
+                };
             }
         };
 
