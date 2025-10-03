@@ -21,7 +21,7 @@ const Dashboard = () => {
     useEffect(() => {
         const getUserLocationData = async () => {
             try {
-                const response = await fetch('http://ip-api.com/json');
+                const response = await fetch('https://ipapi.co/json/');
                 if (!response.ok) throw new Error('Failed to fetch location');
                 return await response.json();
             } catch (error) {
@@ -74,8 +74,8 @@ const Dashboard = () => {
                 setLon(null);
             } else {
                 setLocation(locationData);
-                setLat(locationData?.lat ?? null);
-                setLon(locationData?.lon ?? null);
+                setLat(locationData?.latitude ?? null);
+                setLon(locationData?.longitude ?? null);
             }
 
             if (!userError) setFetchError(null);
